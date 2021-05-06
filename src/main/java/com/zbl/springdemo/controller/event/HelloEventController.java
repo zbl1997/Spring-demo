@@ -1,4 +1,4 @@
-package com.zbl.springdemo.controller;
+package com.zbl.springdemo.controller.event;
 
 import com.zbl.springdemo.event.HelloEvent;
 import org.springframework.beans.factory.annotation.Autowired;

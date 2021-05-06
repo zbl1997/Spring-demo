@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    addresses: 192.168.16.248:5672
+    username: hxrabbit
+    password: hx_mq_rabbit_123
+    virtual-host: /

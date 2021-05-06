@@ -1,6 +1,6 @@
 package com.zbl.springdemo;
 
-import com.zbl.springdemo.controller.HelloEventController;
+import com.zbl.springdemo.controller.event.HelloEventController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,6 @@ class SpringDemoApplicationTests {
 
     @Test
     void contextLoads() {
-        helloEventController.hello();
     }
 
 }
