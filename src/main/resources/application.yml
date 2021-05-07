@@ -7,3 +7,7 @@ spring:
     username: hxrabbit
     password: hx_mq_rabbit_123
     virtual-host: /
+    listener:
+      type: simple # direct类型是2.0之后才有的
+      simple:
+        acknowledge-mode: none #manual：手动应答 AUTO：当没有抛出异常时会自动应答

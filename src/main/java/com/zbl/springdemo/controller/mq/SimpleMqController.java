@@ -1,6 +1,7 @@
 package com.zbl.springdemo.controller.mq;
 
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,10 @@ public class SimpleMqController {
 
     @GetMapping("/helloMQ")
     public void helloMQ() {
-        Message message = new Message("hello".getBytes(), new MessageProperties());
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);//消息持久化
+
+        Message message = new Message("hello".getBytes(), messageProperties);
         rabbitTemplate.convertAndSend("simpleQueue",message);
     }
 }
