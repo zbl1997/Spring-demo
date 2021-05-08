@@ -7,7 +7,21 @@ spring:
     username: hxrabbit
     password: hx_mq_rabbit_123
     virtual-host: /
+    #生产者确认
+    publisher-confirm-type: simple #none correlated
+    # 路由失败回调
+    publisher-returns: true
+    template:
+      # 必须设置成true 消息路由失败通知监听者，false 将消息丢弃
+      mandatory: true
     listener:
       type: simple # direct类型是2.0之后才有的
       simple:
         acknowledge-mode: none #manual：手动应答 AUTO：当没有抛出异常时会自动应答
+        # 每次从RabbitMQ获取的消息数量
+        prefetch: 1
+        default-requeue-rejected: false
+        # 每个队列启动的消费者数量
+        concurrency: 1
+        # 每个队列最大的消费者数量
+        max-concurrency: 1
