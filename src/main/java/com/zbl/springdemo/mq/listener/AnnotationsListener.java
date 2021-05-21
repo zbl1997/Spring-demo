@@ -30,7 +30,13 @@ public class AnnotationsListener {
                                                           type = ExchangeTypes.TOPIC),
                                      key = {"#.#"}))
     public void onMessage(Message message, Channel channel) throws IOException {
-        System.out.println("收到 " + JSON.toJSONString(message));
-        channel.basicAck(1000L, true);
+        long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            System.out.println("收到 " + JSON.toJSONString(message));
+            channel.basicAck(deliveryTag, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            channel.basicReject(deliveryTag, false);
+        }
     }
 }

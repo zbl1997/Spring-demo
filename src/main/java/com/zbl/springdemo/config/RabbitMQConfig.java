@@ -108,12 +108,6 @@ public class RabbitMQConfig {
     /**
      * queue
      */
-
-    @Bean("simpleQueue")
-    public Queue getMsgQueue() {
-        return new Queue("SIMPLE_QUEUE");
-    }
-
     @Bean
     public Queue getTtlQueue() {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -126,7 +120,7 @@ public class RabbitMQConfig {
         //x-dead-letter-routing-key：死信交换机的路由键。
         //x-single-active-consumer：true/false。表示是否最多只允许一个消费者消费
         //x-queue-master-locator：选择主节点策略，保证消息的 FIFO。min-masters- 托管最小数量的绑定主机的节点；client-local- 选择声明的队列已经连接到客户端的节点；random- 随机选择一个节点
-        map.put("x-message-ttl", 5000);//队列中所有消息5秒后过期，到队列头部时删除
+        map.put("x-message-ttl", 5000);//队列中所有消息5秒后过期，立即删除。
         map.put("x-expires", 100000);//队列闲置10秒后立即被删除
         //参数1-name：队列名称
         //参数2-durable：是否持久化
@@ -134,6 +128,12 @@ public class RabbitMQConfig {
         //参数4-autoDelete：是否自动删除。前提是必须要至少有一个消费者先连上当前队列，然后当所有消费者都断开连接之后，队列自动被删除
         return new Queue("LONGLY_WOLF_TTL_QUEUE",false,false,false,map);
     }
+
+    @Bean("simpleQueue")
+    public Queue getMsgQueue() {
+        return new Queue("SIMPLE_QUEUE");
+    }
+
 
     /**
      * bind
