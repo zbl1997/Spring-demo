@@ -117,6 +117,8 @@ public class RabbitMQConfig {
     @Bean
     public Queue getTtlQueue() {
         Map<String, Object> map = new HashMap<String, Object>();
+        //ha-mode: all\exactly\nodes设置镜像队列
+        //x-queue-mode: lazy。 惰性队列，消费时从磁盘读取到内存再发送，速度慢，容量大
         //x-max-length：队列中的最大消息数。
         //x-max-length-bytes：队列的最大容量（bytes）。
         //overflow：队列溢出之后的策略 drop-head - 丢弃队列头部消息(集群)
